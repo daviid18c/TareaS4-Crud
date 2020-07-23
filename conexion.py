@@ -36,4 +36,4 @@ con.conectar()
 con.cerrar()
 print(con.conector)
 print('asdafgf')
-#asfsdgsda
+#asfsdgsda FUNCIONAAAA
