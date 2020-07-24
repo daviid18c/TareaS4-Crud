@@ -12,13 +12,13 @@ class DaoGrupo(Conector):
     def consultar(self, buscar):
         result = False
         try:
-            sql = "SELECT pc.id, codigo, grupo, g.descripcion, pc.descripcion, naturaleza, estado FROM plancuenta pc INNER JOIN grupo g ON pc.grupo=g.id where descripcion like '%" + str(buscar) + "%' order by id"
+            sql = "SELECT id, descripcion from grupo where descripcion like '%" + str(buscar) + "%' order by id"
             self.conectar()
             self.conector.execute(sql)
             result = self.conector.fetchall()
             self.conn.commit()
         except Exception as e:
-            print("Error en la consulta de grupo",e)
+            print("Error en la consulta: grupo",e)
             self.conn.rollback()
         finally: self.cerrar()
         return result
@@ -31,7 +31,7 @@ class DaoGrupo(Conector):
             self.conector.execute(sql, (gru.descripcion))
             self.conn.commit()
         except Exception as e:
-            print("Error al insertar grupo",e)
+            print("Error al insertar: grupo",e)
             correcto = False
             self.conn.rollback()
         finally: self.cerrar()
@@ -45,7 +45,7 @@ class DaoGrupo(Conector):
             self.conector.execute(sql, (gru.descripcion, gru.id))
             self.conn.commit()
         except Exception as e:
-            print("Error al modificar grupo",e)
+            print("Error al modificar: grupo",e)
             correcto = False
             self.conn.rollback()
         finally: self.cerrar()
@@ -59,13 +59,8 @@ class DaoGrupo(Conector):
             self.conector.execute(sql, (gru.id))
             self.conn.commit()
         except Exception as e:
-            print("Error al eliminar grupo",e)
+            print("Error al eliminar: grupo",e)
             correcto = False
             self.conn.rollback()
         finally: self.cerrar()
         return correcto
-
-''' con = DaoGrupo()
-empleados = con.consultar("")
-print(empleados) 
-for emp in empleados: print(emp) '''

@@ -4,7 +4,7 @@ base_dir=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_dir+'/Daos')
 sys.path.append(base_dir+'/Modelos')
 
-from Daos.dao_grupo import DaoGrupo
+from dao_grupo import DaoGrupo
 from mod_grupo import ModGrupo
 
 class CtrGrupo:

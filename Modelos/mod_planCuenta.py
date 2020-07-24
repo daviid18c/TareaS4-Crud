@@ -1,8 +1,8 @@
 class ModPlanCuenta:
-    def __init__(self, id=0, cod=0, gru=0, desc='', natu='', est=True):
-        self.__id= id
-        self.__codigo= cod
-        self.__grupo= gru
-        self.__descripcion= desc
-        self.__naturaleza= natu
-        self.__estado= est
+    def __init__(self, id=0, cod=0, gru=0, desc='', natu='', est=1):
+        self.id= id
+        self.codigo= cod
+        self.grupo= gru
+        self.descripcion= desc
+        self.naturaleza= natu
+        self.estado= est

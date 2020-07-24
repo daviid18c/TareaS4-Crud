@@ -10,16 +10,15 @@ from mod_grupo import ModGrupo
 from funciones import menu, PreContinuar
 
 ctr = CtrGrupo()
-def insertar(rango):
-    for i in range(int(rango)):
-        descripcion = input('Ingrese descripcion: ')
-        cli = ModGrupo(desc=descripcion)
-        if ctr.ingresar(cli):
-            print('Registro grabado correctamente')
-        else:
-            print('Error al grabar el Registro')
+def insertarGru():
+    descripcion = input('Ingrese descripcion: ')
+    cli = ModGrupo(desc=descripcion)
+    if ctr.ingresar(cli):
+        print('Registro grabado correctamente')
+    else:
+        print('Error al grabar el Registro')
 
-def modificar():
+def modificarGru():
     codigo = input('Ingrese codigo: ')
     descripcion = input('Ingrese descripcion: ')
     cli = ModGrupo(cod=codigo,desc=descripcion)
@@ -28,7 +27,7 @@ def modificar():
     else:
         print('Error al modificar el Registro')
 
-def eliminar():
+def eliminarGru():
     codigo = input('--Ingrese codigo: ')
     cli = ModGrupo(cod=codigo)
     if ctr.eliminar(cli):
@@ -38,46 +37,47 @@ def eliminar():
 
 #Modificacion: Añadi un motivo, para que se presente de manera directa 
 # sin pedir un nombre, cuando se haga la eliminacion y modificacion
-def consultar(motivo):
+def consultarGru(motivo):
     if motivo == 'C':
         buscar = input('Ingrese nombre a buscar: ')
     else:
         buscar=''
     cli = ctr.consulta(buscar)
+    print('--------------------------------')
     print('{:^10} {:^3} {:^20}'.format('Codigo','|', 'Descripcion'))
+    print('--------------------------------')
     for registro in cli:
         print('{:^10} {:^3} {:^20}'.format(registro[0],'|', registro[1]))
+    print('--------------------------------')
 
 
 def ejecutar_grupo():
     opc = ''
     while opc != '5':
         opc = str(menu(
-            ['Ingresar', 'Modificar', 'Eliminar', 'Consultar', 'Salir'],
-            'Menu Grupo'))
+            ['Ingresar', 'Modificar', 'Eliminar', 'Consultar', 'Retornar Menú Principal'],
+            'MENU GRUPO DE CUENTAS'))
         if opc == '1':
             print('\n<<<Insertar datos>>> ')
-            valor = input('-Ingrese cantidad de datos a Ingresar')
-            insertar(valor)
+            insertarGru()
             PreContinuar()
         elif opc == '2':
             print('\n<<<Modificar datos>>>')
-            consultar('M')
-            modificar()
+            consultarGru('M')
+            modificarGru()
             PreContinuar()
         elif opc == '3':
             print('\n<<<Eliminar datos>>>')
-            consultar('E')
-            eliminar()
+            consultarGru('E')
+            eliminarGru()
             PreContinuar()
         elif opc == '4':
             print('\n<<<Consultar datos>>>')
-            consultar('C')
+            consultarGru('C')
             PreContinuar()
         elif opc == '5':
-            print('<<<Gracias por usar el Sistema>>>')
+            print('<<<Retornando al menú principal>>>')
             PreContinuar()
         elif opc != '5':
-            print('Seleccione una opción correcta')
+            print('Seleccione una opción correcta') 
             PreContinuar()
-ejecutar_grupo()

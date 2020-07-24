@@ -12,60 +12,55 @@ class DaoPlanCuenta(Conector):
     def consultar(self, buscar):
         result = False
         try:
-            sql = "Select id, descripcion From grupo where descripcion like '%" + str(buscar) + "%' order by id"
+            sql = "Select  pc.id, codigo, g.descripcion, pc.descripcion, naturaleza, estado FROM plancuenta pc INNER JOIN grupo g ON pc.grupo=g.id where pc.descripcion like '%" + str(buscar) + "%' order by pc.id"
             self.conectar()
             self.conector.execute(sql)
             result = self.conector.fetchall()
             self.conn.commit()
         except Exception as e:
-            print("Error en la consulta de grupo",e)
+            print("Error en la consulta: Plan de Cuenta",e)
             self.conn.rollback()
         finally: self.cerrar()
         return result
 
-    def ingresar(self, gru):
+    def ingresar(self, planc):
         correcto = True
         try:
-            sql = "insert into grupo (descripcion) values (%s)"
+            sql = "insert into plancuenta (codigo, grupo, descripcion, naturaleza, estado) values (%s,%s,%s,%s,%s)"
             self.conectar()
-            self.conector.execute(sql, (gru.descripcion))
+            self.conector.execute(sql, (planc.codigo, planc.grupo, planc.descripcion, planc.naturaleza, planc.estado))
             self.conn.commit()
         except Exception as e:
-            print("Error al insertar grupo",e)
+            print("Error al insertar: Plan de Cuenta",e)
             correcto = False
             self.conn.rollback()
         finally: self.cerrar()
         return correcto
 
-    def modificar(self, gru):
+    def modificar(self, planc):
         correcto = True
         try:
-            sql = 'Update grupo set descripcion  = %s where id = %s'
+            sql = 'Update plancuenta set codigo = %s, grupo = %s, descripcion  = %s, naturaleza = %s, estado = %s where id = %s'
             self.conectar()
-            self.conector.execute(sql, (gru.descripcion, gru.id))
+            self.conector.execute(sql, (planc.codigo, planc.grupo, planc.descripcion, planc.naturaleza, planc.estado, planc.id))
             self.conn.commit()
         except Exception as e:
-            print("Error al modificar grupo",e)
+            print("Error al modificar: Plan de Cuenta",e)
             correcto = False
             self.conn.rollback()
         finally: self.cerrar()
         return correcto
 
-    def eliminar(self, gru):
+    def eliminar(self, planc):
         correcto = True
         try:
-            sql = 'delete from grupo where id = %s'
+            sql = 'delete from plancuenta where id = %s'
             self.conectar()
-            self.conector.execute(sql, (gru.id))
+            self.conector.execute(sql, (planc.id))
             self.conn.commit()
         except Exception as e:
-            print("Error al eliminar grupo",e)
+            print("Error al eliminar: Plan de Cuenta",e)
             correcto = False
             self.conn.rollback()
         finally: self.cerrar()
         return correcto
-
-''' con = DaoGrupo()
-empleados = con.consultar("")
-print(empleados) 
-for emp in empleados: print(emp) '''

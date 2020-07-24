@@ -30,10 +30,3 @@ class Conector:
     @property
     def conn(self):
         return self.__conn
-
-con = Conector()
-con.conectar()
-con.cerrar()
-print(con.conector)
-print('asdafgf')
-#asfsdgsda FUNCIONAAAA
