@@ -21,19 +21,25 @@ def insertarGru():
 def modificarGru():
     codigo = input('Ingrese codigo: ')
     descripcion = input('Ingrese descripcion: ')
-    cli = ModGrupo(cod=codigo,desc=descripcion)
-    if ctr.modificar(cli):
-        print('Registro modificado correctamente')
+    if codigo.isnumeric():
+        cli = ModGrupo(cod=codigo,desc=descripcion)
+        if ctr.modificar(cli):
+            print('Registro modificado correctamente')
+        else:
+            print('Error al modificar el Registro')
     else:
-        print('Error al modificar el Registro')
+        print('--Valor ingresado inadecuado')
 
 def eliminarGru():
     codigo = input('--Ingrese codigo: ')
-    cli = ModGrupo(cod=codigo)
-    if ctr.eliminar(cli):
-        print('Registro eliminado correctamente')
+    if codigo.isnumeric():
+        cli = ModGrupo(cod=codigo)
+        if ctr.eliminar(cli):
+            print('Registro eliminado correctamente')
+        else:
+            print('Error al eliminar el Registro')
     else:
-        print('Error al eliminar el Registro')
+        print('--Valor ingresado inadecuado')
 
 #Modificacion: Añadi un motivo, para que se presente de manera directa 
 # sin pedir un nombre, cuando se haga la eliminacion y modificacion

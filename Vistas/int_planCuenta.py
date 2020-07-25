@@ -20,11 +20,14 @@ def insertarPlC():
     descripcion = input('Ingrese descripcion: ')
     naturaleza = input('Ingrese naturaleza(A/D): ')
     estado = input('Ingrese estado(1/0): ') #1=True ; 0=False
-    cli = ModPlanCuenta(cod=codigo, gru=grupo, desc=descripcion, natu=naturaleza, est=estado)
-    if ctr.ingresar(cli):
-        print('Registro grabado correctamente')
+    if codigo.isnumeric() and grupo.isnumeric() and (naturaleza=='A' or naturaleza== 'D') and (estado==1 or naturaleza== 0):
+        cli = ModPlanCuenta(cod=codigo, gru=grupo, desc=descripcion, natu=naturaleza, est=estado)
+        if ctr.ingresar(cli):
+            print('Registro grabado correctamente')
+        else:
+            print('Error al grabar el Registro')
     else:
-        print('Error al grabar el Registro')
+        print('--Valores ingresados inadecuados')
 
 def modificarPlC():
     idplc=input('ingrese id: ')
@@ -34,19 +37,25 @@ def modificarPlC():
     descripcion = input('Ingrese descripcion: ')
     naturaleza = input('Ingrese naturaleza(A/D): ')
     estado = input('Ingrese estado(1/0): ') #1=True ; 0=False
-    cli = ModPlanCuenta(id=idplc ,cod=codigo, gru=grupo, desc=descripcion, natu=naturaleza, est=estado)
-    if ctr.modificar(cli):
-        print('Registro modificado correctamente')
+    if idplc.isnumeric() and codigo.isnumeric() and grupo.isnumeric() and (naturaleza=='A' or naturaleza== 'D') and (estado==1 or naturaleza== 0):
+        cli = ModPlanCuenta(id=idplc ,cod=codigo, gru=grupo, desc=descripcion, natu=naturaleza, est=estado)
+        if ctr.modificar(cli):
+            print('Registro modificado correctamente')
+        else:
+            print('Error al modificar el Registro')
     else:
-        print('Error al modificar el Registro')
+        print('--Valores ingresados inadecuados')
 
 def eliminarPlC():
     idplc = input('Ingrese id: ')
     cli = ModPlanCuenta(id=idplc)
-    if ctr.eliminar(cli):
-        print('Registro eliminado correctamente')
+    if idplc.isnumeric():
+        if ctr.eliminar(cli):
+            print('Registro eliminado correctamente')
+        else:
+            print('Error al eliminar el Registro')
     else:
-        print('Error al eliminar el Registro')
+        print('--Valores ingresados inadecuados')
 
 #Modificacion: Añadi un motivo, para que se presente de manera directa 
 # sin pedir un nombre, cuando se haga la eliminacion y modificacion

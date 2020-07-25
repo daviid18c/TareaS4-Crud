@@ -26,5 +26,5 @@ def ejecutar_menuPrincipal():
         elif opc != '3':
             print('Seleccione una opción correcta')
             PreContinuar()
-
+    
 ejecutar_menuPrincipal()
