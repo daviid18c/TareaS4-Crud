@@ -2,7 +2,7 @@ import sys
 import pymysql
 
 class Conector:
-    def __init__(self, server='localhost', usuario='root', password='', basedato='crud_s4'):
+    def __init__(self, server='localhost', usuario='root', password='', basedato='crud_s4web'):
         self.__server = server
         self.__usuario = usuario
         self.__password = password
